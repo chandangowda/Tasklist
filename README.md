@@ -1,73 +1,75 @@
-# React + TypeScript + Vite
+# Tasklist
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Tasklist is a React application to manage daily tasks.
 
-Currently, two official plugins are available:
+Main features:
+- Create a task
+- Edit a task
+- Delete a task
+- View all tasks in a list
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## Libraries Used
 
-## React Compiler
+Core libraries:
+- `react` (v19)
+- `react-dom` (v19)
+- `react-router` (routing between pages)
+- `@mantine/core` (UI components)
+- `@mantine/hooks` (utility hooks)
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+State/update helpers:
+- `use-immer`
+- `immer`
 
-## Expanding the ESLint configuration
+Build and tooling:
+- `vite`
+- `typescript`
+- `eslint`
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+## Concepts Used
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+- React Context:
+  Shared task state and actions are managed in `src/TaskContext.tsx`.
+- Centralized state management:
+  Create, update, and delete logic is handled in one provider and consumed across pages.
+- Client-side routing:
+  Routes are configured in `src/AppRoutes.tsx` for list/create/edit screens.
+- Immutable state updates:
+  `use-immer` is used to update nested state in a clean and safe way.
+- Component-based UI:
+  Reusable React components with Mantine UI elements.
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+## Project Structure
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+- `src/ListTask.tsx` - task list page
+- `src/CreateTask.tsx` - create task page
+- `src/EditTask.tsx` - edit task page
+- `src/TaskContext.tsx` - global task context/provider
+- `src/AppRoutes.tsx` - application route definitions
+
+## How to Run the Project
+
+Prerequisites:
+- Node.js 18+ (recommended)
+
+Install dependencies:
+
+```bash
+npm install
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+Start development server:
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```bash
+npm run dev
 ```
+
+Open the app in your browser:
+- `http://localhost:5173`
+
+## Available Scripts
+
+- `npm run dev` - start Vite dev server
+- `npm run build` - type-check and create production build
+- `npm run preview` - preview production build locally
+- `npm run lint` - run ESLint checks
